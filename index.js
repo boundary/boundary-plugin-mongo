@@ -6,7 +6,15 @@ process.on('uncaughtException', function(err) {
 
 var _format = require('util').format;
 var _os = require('os');
-var _param = require('./param.json');
+
+var _param  = process.env.TSP_PLUGIN_PARAMS;
+if (_param == null || _param == '')
+{
+  _param = require('./param.json');
+}else
+{
+  _param = parseJSON(_param); 
+} 
 var _request = require('request');
 
 var _pollInterval; // the interval to poll the metrics
